@@ -8,7 +8,9 @@ The `TextAnime library`  is a simple and flexible way to animate text in your we
 ## Usage
 
 First, include the `TextAnime library cdn` in your JavaScript code:
-
+``` CSS
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ahkamboh/textanime.js@main/TextAnime.js/textanime.css">
+```
 ```javascript
 <script src="https://cdn.jsdelivr.net/gh/ahkamboh/textanime.js@main/TextAnime.js/textanime.js"></script>
 ```
