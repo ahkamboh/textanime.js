@@ -1,11 +1,12 @@
 class TextAnimator {
-    constructor(texts, containerClass, speed = 5000) {
+    constructor(texts, containerSelector, speed = 5000, animationName = 'fadeInOut') {
       this.texts = texts;
-      this.containers = document.getElementsByClassName(containerClass);
+      this.containers = document.querySelectorAll(containerSelector);
       this.currentText = 0;
       this.speed = speed;
       this.intervalId = null;
-      this.setAnimationStyle(containerClass);
+      this.animationName = animationName;
+      this.setAnimationStyle(containerSelector);
     }
   
     changeText() {
@@ -38,43 +39,39 @@ class TextAnimator {
       }
     }
 
-    setContainer(containerClass) {
-      this.containers = document.getElementsByClassName(containerClass);
+    setContainer(containerSelector) {
+      this.containers = document.querySelectorAll(containerSelector);
       if (this.intervalId) {
         clearInterval(this.intervalId);
         this.start();
       }
-      this.setAnimationStyle(containerClass);
+      this.setAnimationStyle(containerSelector);
     }
 
-    setAnimationStyle(containerClass) {
+    setAnimationStyle(containerSelector) {
       const style = document.createElement('style');
       style.textContent = `
-        .${containerClass} span {
+        ${containerSelector} span {
           opacity: 0;
-          animation: fadeInOut 5s forwards;
-        }
-
-        @keyframes fadeInOut {
-          0% {
-            opacity: 0;
-          }
-
-          50% {
-            opacity: 1;
-          }
-
-          100% {
-            opacity: 0;
-          }
+          animation: ${this.animationName} ${this.speed}ms forwards;
         }
       `;
       document.head.appendChild(style);
     }
+
+    setAnimation(animationName) {
+      this.animationName = animationName;
+      if (this.intervalId) {
+        clearInterval(this.intervalId);
+        this.start();
+      }
+      this.setAnimationStyle(this.containerSelector);
+    }
 }
-  
+
 // Usage:
 // const animator = new TextAnimator(['Courses', 'Programs', 'Features'], 'fade-text-class');
 // animator.start();
+// animator.setAnimation('slideIn'); // Change animation to 'slideIn'
 // animator.setSpeed(3000); // Change speed to 3 seconds
 // animator.setContainer('new-container-class'); // Change container to elements with class 'new-container-class'
