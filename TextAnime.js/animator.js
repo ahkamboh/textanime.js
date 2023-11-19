@@ -5,7 +5,9 @@ class TextAnimator {
       this.currentText = 0;
       this.speed = speed;
       this.intervalId = null;
+      this.setAnimationStyle(containerClass);
     }
+  
     changeText() {
       const text = this.texts[this.currentText];
       const letters = text.split('');
@@ -42,6 +44,32 @@ class TextAnimator {
         clearInterval(this.intervalId);
         this.start();
       }
+      this.setAnimationStyle(containerClass);
+    }
+
+    setAnimationStyle(containerClass) {
+      const style = document.createElement('style');
+      style.textContent = `
+        .${containerClass} span {
+          opacity: 0;
+          animation: fadeInOut 5s forwards;
+        }
+
+        @keyframes fadeInOut {
+          0% {
+            opacity: 0;
+          }
+
+          50% {
+            opacity: 1;
+          }
+
+          100% {
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
     }
 }
   
