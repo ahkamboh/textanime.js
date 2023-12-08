@@ -18,7 +18,7 @@ First, include the `TextAnime library cdn` in your JavaScript code:
 Then, create a new instance of `TextAnime`:
 
 ```javascript
-const animator = new TextAnimator(['Courses', 'Programs', 'Features'], 'fade-text-class');
+const animator = new TextAnimator(['Courses', 'Programs', 'Features'], '.fade-text-class');
 ```
 
 In this example, 'Courses', 'Programs', and 'Features' are the words that will be animated, and 'fade-text-class' is the class of the container where the animation will be displayed.
